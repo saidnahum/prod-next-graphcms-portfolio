@@ -42,8 +42,6 @@ export default function Home({ data }) {
 						))
 					}
 				</div>
-
-				<h1>Welcome to our awesome portfolio</h1>
 			</div>
 
 			
