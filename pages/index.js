@@ -5,7 +5,6 @@ import { getPostsAndPortfolios } from '../utils/data';
 export const getStaticProps = async () => {
 
 	const data = await getPostsAndPortfolios();
-
 	return {
 		props: {
 			data
