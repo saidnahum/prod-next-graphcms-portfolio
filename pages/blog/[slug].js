@@ -37,7 +37,7 @@ const Post = ({ post }) => {
          </Head>
 
          <div className='max-w-3xl mx-auto px-6 sm:px-6 lg:px-0'>
-            <h1 className='text-4xl text-center  md:text-6xl text-gray-900 font-bold'>{post?.title}</h1>
+            <h1 className='text-4xl text-center mb-10 md:text-6xl text-gray-900 font-bold'>{post?.title}</h1>
             <div className='flex justify-between items-center my-5 md:my-0 mb-0 md:mb-5'>
                <p className='text-gray-700 text-sm md:text-base'>{new Date(post.date).toDateString()}</p>
                <div className='flex items-center'>
@@ -45,8 +45,8 @@ const Post = ({ post }) => {
                   <Image
                      className='rounded-full border-8 border-red-900'
                      src={post.author.image.url}
-                     width={post.author.image.width / 8}
-                     height={post.author.image.height / 8}
+                     width={50}
+                     height={50}
                      objectFit='cover'
                   />
                </div>
