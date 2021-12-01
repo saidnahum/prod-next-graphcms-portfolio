@@ -1,10 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { getPosts } from '../../utils/data';
 import Link from 'next/link';
 import Head from 'next/head';
+import { request } from 'graphql-request';
+import useSWR from 'swr';
+
+const fetcher = (endpoint, query, variables) => request(endpoint, query, variables);
 
 export const getStaticProps = async () => {
-   const data = await getPosts();
+   const data = await fetcher(
+      'https://api-us-east-1.graphcms.com/v2/ckwgpr2oa0h8y01xo1s4m0ihb/master',
+      `{
+         posts (orderBy: date_DESC) {
+            title
+            slug
+            description
+            date
+            tags
+            author {
+            name
+            image {
+               url
+               width
+               height
+            }
+            }
+            content {
+            markdown
+            }
+         }
+      }
+      `      
+   )
 
    return {
       props: {
@@ -14,6 +41,39 @@ export const getStaticProps = async () => {
 }
 
 const index = ({ posts }) => {
+
+   const [searchValue, setSearchValue] = useState('');
+   const { data, error } = useSWR(
+      [
+      "https://api-us-east-1.graphcms.com/v2/ckwgpr2oa0h8y01xo1s4m0ihb/master",
+      `
+      query getPosts($searchValue: String) {
+         posts (orderBy: date_DESC, where: {title_contains: $searchValue}) {
+            title
+            id
+            date
+            slug
+            description
+            author {
+               name
+            }
+            }
+         }
+      `,
+      searchValue
+   ],
+      (endpoint, query) => fetcher(endpoint, query, {searchValue}),
+      { initialData: {posts}, revalidateOnFocus: true }
+   )
+
+   if( error){
+      return (
+         <div>
+            <h2>There was an error with the data fetching</h2>
+         </div>
+      )
+   }
+   
    return (
       <>
          <Head>
@@ -22,12 +82,20 @@ const index = ({ posts }) => {
             <link rel="icon" href="/favicon.ico" />
          </Head>
          <div className='max-w-3xl mx-auto px-6 sm:px-6 lg:px-0'>
-            <div className='md:mt-20'>
-               <div className='mb-5'>
-                  <h1 className='text-3xl font-semibold text-center md:text-left'>All Posts</h1>
-               </div>
+            <h1 className='text-5xl text-gray-600 font-serif mb-6 font-bold'>The Blog</h1>
+            <div className='flex justify-center'>
+               <input 
+                  type="text" 
+                  placeholder='Search post'
+                  value={searchValue}
+                  onChange={(event) => setSearchValue(event.target.value)}
+                  className='outline-none focus:outline-none focus:ring-2 focus:ring-gray-200 rounded-lg border border-gray-200 pl-5 py-2 w-full'
+               />
+            </div>
+            <div className='md:mt-10'>
+               
                {
-                  posts.map(post => (
+                  data?.posts.map(post => (
                      <div className='grid grid-cols-1 md:grid-cols-4 py-6' key={post.slug}>
                         <div className='mb-2 md:mb-0 md:col-span-1'>
                            <p className='text-gray-500 text-sm'>{new Date(post.date).toDateString()}</p>
