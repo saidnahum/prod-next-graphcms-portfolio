@@ -6,7 +6,7 @@ export const getPostsAndPortfolios = async () => {
 
   const query = gql`
 			query {
-  posts {
+  posts (first: 3, orderBy: date_DESC) {
     title
     slug
     description
@@ -24,7 +24,7 @@ export const getPostsAndPortfolios = async () => {
       markdown
     }
   }
-  portfolios {
+  portfolios (first: 3, orderBy: date_DESC) {
     title
     tags
     slug
@@ -48,7 +48,7 @@ export const getPortfolioItems = async () => {
 
   const query = gql`
 			query {
-        portfolios {
+        portfolios (orderBy: date_DESC) {
     title
     tags
     slug
@@ -72,7 +72,7 @@ export const getPosts = async () => {
 
   const query = gql`
 			query {
-  posts {
+  posts (orderBy: date_DESC) {
     title
     slug
     description
