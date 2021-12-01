@@ -15,7 +15,7 @@ export const Footer = () => {
             <FaGithub className='hover:text-gray-600 cursor-pointer'/>
             <FaYoutube className='hover:text-gray-600 cursor-pointer'/>
          </div>
-         <div className='text-gray-500 py-5 mb-10'>&copy; {new Date().getFullYear()} Pixel Portfolio</div>
+         <div className='text-gray-500 py-5 mb-10'>&copy; {new Date().getFullYear()} SaidN Portfolio</div>
       </div>
    )
 }

@@ -32,24 +32,32 @@ export default function Home({ portfolioItem }) {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<div className='space-y-10'>
+			<div className='space-y-10 max-w-3xl mx-auto px-6 sm:px-6 lg:px-0'>
 				<div>
-               <h1>{portfolioItem.title}</h1>
-					<p>{new Date(portfolioItem.date).toDateString()}</p>
-					<p>{portfolioItem.description}</p>
-					<Image 
-						src={portfolioItem.coverImage.url}
-						width={portfolioItem.coverImage.width}
-						height={portfolioItem.coverImage.height}
-					/>
-					<div>
-						{
-							portfolioItem.tags.map(tag => (
-								<span key={tag}>{tag}</span>
-							))
-						}
+               <h1 className='text-center md:text-left text-4xl md:text-6xl  text-gray-900 font-bold'>{portfolioItem.title}</h1>
+					<div className='flex flex-col md:flex-row justify-between items-center mb-10 mt-2'>
+						<p className='text-gray-800 text-sm md:text-base'>{new Date(portfolioItem.date).toDateString()}</p>
+						<div className=' flex justify-center items-center space-x-3'>
+							{
+								portfolioItem.tags.map(tag => (
+									<span className='uppercase mt-5 text-xs md:text-sm md:tracking-wide md:m-2 p-2  md:px-2 md:py-1 bg-gray-100 text-gray-900 rounded-lg' key={tag}>{tag}</span>
+								))
+							}
+						</div>
 					</div>
-					<section className='prose'>
+					<p className='text-gray-700 text-justify mb-10'>{portfolioItem.description}</p>
+					<div className='shadow-md'>
+						<Image 
+							src={portfolioItem.coverImage.url}
+							width={portfolioItem.coverImage.width}
+							height={portfolioItem.coverImage.height}
+							objectFit='cover'
+							layout='responsive'
+							className='coverImage'
+							alt={portfolioItem.title}
+						/>
+					</div>
+					<section className='prose max-w-3xl mx-auto mt-10'>
 						<ReactMarkdown>
 							{portfolioItem.content.markdown}
 						</ReactMarkdown>

@@ -190,3 +190,27 @@ export const getPost = async (slug) => {
 
   return await graphQLClient.request(query, variables)
 }
+
+export const getPhotos = async () => {
+  const endpoint = 'https://api-us-east-1.graphcms.com/v2/ckwgpr2oa0h8y01xo1s4m0ihb/master';
+  const graphQLClient = new GraphQLClient(endpoint);
+
+  const query = gql`
+    query {
+      photos (orderBy: date_DESC) {
+        id
+        date
+        title
+        description
+        photo {
+          id
+          height
+          width
+          url
+        }
+      }
+    }
+	`;
+
+  return await graphQLClient.request(query)
+}

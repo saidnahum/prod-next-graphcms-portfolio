@@ -58,10 +58,8 @@ const Post = ({ post }) => {
                   ))
                }
             </div>
-            <section className='prose max-w-4xl mx-auto'>
-               <ReactMarkdown
-                  escapeHtml={false}
-               >
+            <section className='prose max-w-3xl mx-auto'>
+               <ReactMarkdown>
                   {post.content.markdown}
                </ReactMarkdown>
             </section>

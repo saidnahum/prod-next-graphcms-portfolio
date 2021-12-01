@@ -3,12 +3,21 @@
 @tailwind utilities;
 
 @layer base {
+
+   .coverImage {
+      @apply rounded-lg
+   }
+
    .prose p {
       @apply text-justify
    }
 
+   section.prose h1 {
+      @apply text-2xl md:text-4xl
+   }
+
    .prose img{
-      @apply rounded-lg
+      @apply rounded-lg shadow-md
    }
 
    .prose h6 {
