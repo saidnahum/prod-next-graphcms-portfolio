@@ -54,6 +54,7 @@ const index = ({ portfolios }) => {
                                  objectFit='cover'
                                  className='absolute'
                                  layout='responsive'
+                                 alt={portfolio.title}
                               />
                            </div>
                         </a>

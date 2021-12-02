@@ -48,6 +48,7 @@ const Post = ({ post }) => {
                      width={50}
                      height={50}
                      objectFit='cover'
+                     alt={post.title}
                   />
                </div>
             </div>

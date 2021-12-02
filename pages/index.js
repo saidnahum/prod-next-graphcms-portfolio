@@ -55,6 +55,7 @@ export default function Home({ data }) {
 												objectFit='cover'
 												className='absolute'
 												layout='responsive'
+												alt={portfolio.title}
 											/>
 										</div>
 									</a>
