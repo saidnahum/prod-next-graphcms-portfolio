@@ -13,7 +13,8 @@ const blurImages = async (photos) => {
             base64,
             id: image.id,
             description: image.description,
-            date: image.date
+            date: image.date,
+            title: image.title
          }
       })
    );
@@ -36,6 +37,8 @@ export const getStaticProps = async() => {
 
 const gallery = ({ blurredPhotos }) => {
 
+   console.log(blurredPhotos);
+
    return (
       <div className='max-w-3xl mx-auto px-4 sm:px-6 lg:px-0 grid grid-cols-2 gap-3'>
          {
@@ -49,6 +52,7 @@ const gallery = ({ blurredPhotos }) => {
                   blurDataURL={photo.base64}
                   objectFit='cover'
                   layout='responsive'
+                  alt={photo.title}
                />
             ))
          }

@@ -44,7 +44,7 @@ export const getStaticProps = async () => {
    }
 }
 
-const index = ({ posts }) => {
+const Blog = ({ posts }) => {
 
    const [searchValue, setSearchValue] = useState('');
    const [skip, setSkip] = useState(0);
@@ -164,5 +164,5 @@ const index = ({ posts }) => {
    )
 }
 
-export default index
+export default Blog
 
