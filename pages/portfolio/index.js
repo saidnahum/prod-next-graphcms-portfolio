@@ -17,7 +17,7 @@ export const getStaticProps = async () => {
 
 const index = ({ portfolios }) => {
 
-   console.log(portfolios);
+   //console.log(portfolios);
 
    return (
       
